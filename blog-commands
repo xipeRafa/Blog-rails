@@ -1,0 +1,27 @@
+rails new blog
+
+rails g controller posts
+routes.rb
+   resources :posts
+   root 'posts#index'
+posts_controller.rb
+  def index
+  end
+posts_controller.rb
+  def new
+  end
+
+rails g model Post title:string body:text
+rake db:migrate
+
+rails g model Comment name:string body:text post:references
+rake db:migrate
+
+rails g controller Comments
+
+rails g controller pages
+
+rails g devise:install
+rails g devise:views
+rails g devise user
+rake db:migrate
