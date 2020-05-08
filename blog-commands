@@ -25,3 +25,12 @@ rails g devise:install
 rails g devise:views
 rails g devise user
 rake db:migrate
+---------------------------------------------------
+getting error Migrations are pending. To resolve this issue, run: bin/rake db:migrate RAILS_ENV=development
+
+
+You're getting this error because you've defined a migration in db/migrations that has not yet been run against your database. You can see this by comparing the timestamp at the top of your schema.rb to the most recent migration in your db/migrations folder, or running rake db:migrate:status like bkunzi suggested.
+
+If running rake db:migrate doesn't fix the issue, or if running migrations from scratch causes an error, then you may need to load your database from the schema.rb which should be an up-to-date definition of your database structure. To do this, run rake db:schema:load. If you're starting your database from scratch you can run rake db:setup which will create the database and load the schema.
+
+If that still doesn't work, then you can use rake db:reset to drop the database and recreate it from scratch via rake db:setup. Be careful doing this however, as it is destructive and will permanently delete the database for that environment.
